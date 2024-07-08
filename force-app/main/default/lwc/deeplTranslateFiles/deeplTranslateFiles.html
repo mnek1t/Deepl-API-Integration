@@ -1,0 +1,74 @@
+<template>
+    <div class="slds-grid slds-grid_vertical slds-var-m-around_medium">
+      <div class="slds-col slds-var-m-bottom_small">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+              class="slds-var-m-bottom_small"
+              name="sourceLang"
+              value={textSourceLang}
+              placeholder="Automatic Detection"
+              options={sourceLangOptions}
+              onchange={handleLanguagePreference}
+              variant="label-hidden"
+            ></lightning-combobox>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+              class="slds-var-m-bottom_small"
+              name="targetLang"
+              value={textTargetLang}
+              placeholder="Target"
+              options={supportedLanguages}
+              onchange={handleLanguagePreference}
+              variant="label-hidden"
+            ></lightning-combobox>
+          </div>
+        </div>
+      </div>
+    <div class="slds-var-m-bottom_small">
+      <lightning-input type="checkbox" label="Formallity" name="formalityCheckbox" value={formalityOptions} onchange={handleFormallityOptions}></lightning-input>
+    </div>
+    <div class="slds-col slds-align_absolute-center">
+      <template lwc:if={isFileUploaded}>
+        <div class="slds-grid slds-grid_vertical slds-var-m-around_medium slds-align_absolute-center">
+          <div class="slds-col slds-var-m-bottom_small">{fileName}</div>
+          <lightning-button 
+            variant="brand"
+            label="Translate File" 
+            onclick={handleTranslateFile}
+          ></lightning-button>
+          <lightning-button 
+            variant="base"
+            label="Cancel" 
+            onclick={handleTranslateFileCancelation} 
+          ></lightning-button>
+        </div>
+      </template>
+      <template lwc:elseif={isLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+      </template>
+      <template lwc:elseif={isFileTranslated}>
+        <div class="slds-grid slds-grid_vertical slds-var-m-around_medium slds-align_absolute-center">
+        <div class="slds-col slds-var-m-bottom_small"><strong>{fileName}</strong> file translated to {translatedLanguage}</div>
+          <lightning-button 
+            variant="brand"
+            label="Download again" 
+            onclick={handleDownload}
+          ></lightning-button>
+          <lightning-button 
+            variant="base"
+            label="Back" 
+            onclick={handleTranslateFileCancelation} 
+          ></lightning-button>
+        </div>
+      </template>
+      <template lwc:else>
+        <div class="slds-grid slds-grid_vertical slds-var-m-around_medium slds-align_absolute-center">
+          <lightning-input class="slds-col" type="file" label="Translate File" accept=".txt, .pdf, .pptx, .docx" onchange={openLocalFileUpload}></lightning-input>
+          <lightning-button class="slds-col slds-var-m-top_medium" variant="base" onclick={openSaleforceFileUpload} aria-haspopup="dialog" label="Look for SF Files"></lightning-button>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

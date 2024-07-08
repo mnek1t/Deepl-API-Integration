@@ -1,0 +1,45 @@
+<template>
+    <div class="slds-grid slds-grid_vertical slds-var-m-around_medium">
+      <div class="slds-col slds-var-m-bottom_small">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+              class="slds-var-m-bottom_small"
+              name="sourceLang"
+              value={textSourceLang}
+              placeholder="Automatic Detection"
+              options={sourceLangOptions}
+              onchange={handleLanguagePreference}
+              variant="label-hidden"
+            ></lightning-combobox>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+            <lightning-combobox
+              class="slds-var-m-bottom_small"
+              name="targetLang"
+              value={textTargetLang}
+              placeholder="Target"
+              options={supportedLanguages}
+              onchange={handleLanguagePreference}
+              variant="label-hidden"
+            ></lightning-combobox>
+          </div>
+        </div>
+      </div>
+      <div class="slds-var-m-bottom_small">
+        <lightning-input type="checkbox" label="Formallity" name="formalityCheckbox" value={formalityOptions} onchange={handleFormallityOptions}></lightning-input>
+      </div>
+      <lightning-input-rich-text
+        value={textSource}
+        onchange={handleSourceTextInput}
+        class="slds-var-m-bottom_small"
+        formats={FORMATS}
+      ></lightning-input-rich-text>
+      <lightning-input-rich-text
+        value={textTarget}
+        class="slds-var-m-bottom_small"
+        formats={FORMATS}
+      ></lightning-input-rich-text>
+    </div>
+  </template>
+  

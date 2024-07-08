@@ -1,0 +1,10 @@
+<template>
+    <lightning-tabset variant="scoped">
+        <lightning-tab label="Translate Text">
+            <c-deepl-translate-text supported-languages={supportedLanguages}></c-deepl-translate-text> 
+        </lightning-tab>
+        <lightning-tab label="Translate Files"> 
+            <c-deepl-translate-files supported-languages={supportedLanguages}></c-deepl-translate-files>
+        </lightning-tab>
+    </lightning-tabset>
+</template>
